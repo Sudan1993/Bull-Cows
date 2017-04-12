@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link rel="manifest" href="manifest.json">
+
+    <!-- un-comment this code to enable service worker
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(() => console.log('service worker installed'))
+          .catch(err => console.log('Error', err));
+      }
+    </script>-->
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script type="text/javascript" src="lib/ionic/js/chance-min.js"></script>
+    <!-- <script type="text/javascript" src="lib/ionic/js/random-words.js"></script> -->
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/services.js"></script>
+  </head>
+  <body ng-app="starter">
+
+  <ion-view view-title="Dashboard">
+  <ion-content class="padding">
+    <center><h2>Trouver</h2></center>
+ 
+    
+
+    <div id="content" ng-controller="DashCtrl">
+ 
+
+    <div style="width: 45%;float:left;">
+      <div ng-repeat="item in jsonObj">
+            <div class='card row' style="width:60%;margin-left:30%;">
+                <div class="col col-10 "><div class="item" style="color:black;background-color:lightblue;text-align:center"><span><b>   {{$index+1}}</b></span></div></div>
+                <div class="col col-30">
+                  <div><input  style="border:2px solid;text-align:center;valign:middle;height:50px" type="text" id="inputid" ng-model="item.value" required minlength="1" maxlength="4" ng-disabled="item.btnDisplay"/><span align="center" style="color:red" ng-show="duplicate">&nbsp;&nbsp;*Duplicate !&nbsp;&nbsp;</span>
+                  </div>
+                </div>
+                <div class="col col-offset-60 col-10 footer-btn" >
+                  <button class="button button-icon icon ion-android-send footer-btn" type="submit" ng-show="item.value.length === 4 && !duplicate" ng-disabled="item.btnDisplay" ng-click="calculate(item.value,$index)" >
+                  </button>
+                </div>
+                <div class="col"><b><div class="item">{{item.bull}}&nbsp;&nbsp;-&nbsp;&nbsp;BULLS&nbsp;&nbsp;|&nbsp;&nbsp;{{item.cow}}&nbsp;&nbsp;-&nbsp;&nbsp;COWS</div></div>
+            </div>
+        </div>
+      </div>
+     
+
+      <div style="width:45%;float:right">
+        <div class="row" ng-repeat="rows in chunkedData">
+          <div ng-repeat="item in rows" style="width:60px;height:100px">
+            <div class='card col'>
+                <div class="item" ng-if="item.display===true" style="color:black;background-color:lightblue;text-align:center"><span><b>{{item.value}}</b></span></div>
+                <div class="item" ng-if="item.display===false" style="color:#CCC;background-color:white;text-align:center"><span><strike>{{item.value}}</strike></span></div>
+            </div>
+          </div>
+        </div>
+      </div> 
+    <div>
+  </ion-content>
+</ion-view>
+</body>
+</html>

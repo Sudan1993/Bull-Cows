@@ -1,0 +1,10 @@
+/* Empty. Add your own CSS if you like */
+#inputid{
+    width: 120px;
+    height: 18px;
+    background-size: 20px;
+    font-family: arial;
+    font-size: 24px;
+    padding-left: 5px;
+    letter-spacing: 15px;
+}
